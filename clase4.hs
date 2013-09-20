@@ -20,7 +20,7 @@ filtrar [] _ = []
 filtrar (x:xs) condicion | condicion x = x : filtrar xs condicion
 filtrar (x:xs) condicion | otherwise = filtrar xs condicion
 
-contarPositivos :: Num a => [a] -> Int
+contarPositivos :: (Ord a, Num a) => [a] -> Int
 contarPositivos lista = length $ filtrar lista (>0)
 
 -- 4
@@ -31,11 +31,11 @@ elementoEnLista (x:xs) y | x == y = True
 elementoEnLista (x:xs) y | otherwise = elementoEnLista xs y
 
 -- 7
-vueltear :: [Integer] -> [Integer]
+vueltear :: [a] -> [a]
 vueltear [] = []
 vueltear (x:xs) = vueltear xs ++ [x]
 
-palindrome :: [Integer] -> Bool
+palindrome :: Eq a => [a] -> Bool
 palindrome lista = lista == vueltear lista
 
 palindrome' :: [Integer] -> Bool
