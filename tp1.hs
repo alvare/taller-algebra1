@@ -26,3 +26,20 @@ decreciente :: [Int] -> Bool
 decreciente [] = True
 decreciente [x] = True
 decreciente (x:y:xs) = x >= y && decreciente (y : xs)
+
+-- 5
+primesBelow' n result numbers
+    | p^2 < n = primesBelow' n (result ++ [p]) (filter (\x -> mod x p /= 0) (tail numbers))
+    | otherwise = result ++ numbers
+    where p = head numbers
+
+primesBelow n = 2 : primesBelow' n [] [3,5..n]
+
+factoresPrimos' x [] = []
+
+factoresPrimos' x primos | x `mod` primo == 0 = primo : factoresPrimos' (x `div` primo) primos
+    where primo = head primos
+
+factoresPrimos' x primos | otherwise = factoresPrimos' x (tail primos)
+
+factoresPrimos x = factoresPrimos' x (primesBelow x)
